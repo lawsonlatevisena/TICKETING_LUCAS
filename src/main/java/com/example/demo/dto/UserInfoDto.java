@@ -6,6 +6,7 @@ public class UserInfoDto {
     private String email;
     private String phone;
     private String address;
+    private String[] roles;
 
     public String getFirstname() {
         return firstname;
@@ -45,6 +46,14 @@ public class UserInfoDto {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String[] getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String[] roles) {
+        this.roles = roles;
     }
 
 }
