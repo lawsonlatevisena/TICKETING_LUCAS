@@ -13,6 +13,7 @@ import com.example.demo.models.Role;
 import com.example.demo.models.User;
 import com.example.demo.repositories.AuthRepository;
 import com.example.demo.repositories.RoleRepository;
+import com.example.demo.utils.UserRoles;
 
 @Service
 public class AuthService {
@@ -33,7 +34,7 @@ public class AuthService {
         userInfoDto.setEmail(user.getEmail());
         userInfoDto.setPhone(user.getPhone());
         userInfoDto.setAddress(user.getAddress());
-        userInfoDto.setRoles(user.getRoles().stream().map(Role::getName).toArray(String[]::new));
+        userInfoDto.setRoles(user.getRoles().stream().map(Role::getName).toArray(UserRoles[]::new));
         return userInfoDto;
     }
 
@@ -48,7 +49,7 @@ public class AuthService {
                 registerUserRequestDto.getAddress(), registerUserRequestDto.getPhone());
 
         // On lui attribut le role client par default
-        Role userRole = roleRepository.findByName("ROLE_CITOYEN");
+        Role userRole = roleRepository.findByName(UserRoles.ROLE_CITOYEN);
         userToSave.getRoles().add(userRole);
 
         User savedUser = authRepository.save(userToSave);

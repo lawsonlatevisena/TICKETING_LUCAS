@@ -3,6 +3,8 @@ package com.example.demo.models;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.example.demo.utils.UserRoles;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,7 +26,7 @@ public class Role {
     private long id;
 
     @Column(nullable = false, unique = true)
-    private String name;
+    private UserRoles name;
 
     @ManyToMany(mappedBy = "roles")
     private Set<User> users = new HashSet<>();
@@ -33,7 +35,7 @@ public class Role {
         return id;
     }
 
-    public String getName() {
+    public UserRoles getName() {
         return name;
     }
 
@@ -41,7 +43,7 @@ public class Role {
         this.id = id;
     }
 
-    public void setName(String name) {
+    public void setName(UserRoles name) {
         this.name = name;
     }
 

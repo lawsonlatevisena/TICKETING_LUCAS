@@ -1,12 +1,14 @@
 package com.example.demo.dto;
 
+import com.example.demo.utils.UserRoles;
+
 public class UserInfoDto {
     private String firstname;
     private String lastname;
     private String email;
     private String phone;
     private String address;
-    private String[] roles;
+    private UserRoles[] roles;
 
     public String getFirstname() {
         return firstname;
@@ -48,11 +50,11 @@ public class UserInfoDto {
         this.address = address;
     }
 
-    public String[] getRoles() {
+    public UserRoles[] getRoles() {
         return roles;
     }
 
-    public void setRoles(String[] roles) {
+    public void setRoles(UserRoles[] roles) {
         this.roles = roles;
     }
 
