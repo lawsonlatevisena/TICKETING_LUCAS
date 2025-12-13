@@ -1,5 +1,7 @@
 package com.example.demo.services;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -34,6 +36,7 @@ public class AuthService {
         userInfoDto.setEmail(user.getEmail());
         userInfoDto.setPhone(user.getPhone());
         userInfoDto.setAddress(user.getAddress());
+        userInfoDto.setLastConnection(user.getLastConnectionDate().toString());
         userInfoDto.setRoles(user.getRoles().stream().map(Role::getName).toArray(UserRoles[]::new));
         return userInfoDto;
     }
@@ -59,9 +62,16 @@ public class AuthService {
     public UserInfoDto login(LoginUserRequestDto loginUserRequestDto) {
         User u = authRepository.findByEmail(loginUserRequestDto.getEmail());
 
+        // Verifications du mots de passe
         if (u == null || !passwordEncoder.matches(loginUserRequestDto.getPassword(), u.getPassword()))
             throw new NotFoundException("Invalide Creditentials");
 
+        // Attribution de la nouvelle date de la derniere connection
+        Date dateNow = new Date(System.currentTimeMillis());
+        u.setLastConnectionDate(dateNow);
+
+        // Sauvegarde des modifications
+        authRepository.save(u);
         return converUserToUserInfoDto(u);
     }
 

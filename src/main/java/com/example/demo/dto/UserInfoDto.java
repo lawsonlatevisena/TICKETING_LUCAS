@@ -8,6 +8,16 @@ public class UserInfoDto {
     private String email;
     private String phone;
     private String address;
+    private String lastConnection;
+
+    public String getLastConnection() {
+        return lastConnection;
+    }
+
+    public void setLastConnection(String lastConnection) {
+        this.lastConnection = lastConnection;
+    }
+
     private UserRoles[] roles;
 
     public String getFirstname() {
